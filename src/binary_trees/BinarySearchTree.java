@@ -56,6 +56,33 @@ public class BinarySearchTree {
         return getMin(root.getLeftChild());
     }
 
+    public int findDepth(){
+        return calcDepth(root);
+    }
+
+    private int calcDepth(Node<Integer> root){
+        if (root == null) return 0;
+        if (root.getLeftChild() == null && root.getRightChild() == null) return 0;
+
+        int leftDepth = 1 + calcDepth(root.getLeftChild());
+        int rightDepth = 1 + calcDepth(root.getRightChild());
+
+        return Math.max(leftDepth, rightDepth);
+    }
+
+    public void mirror(){
+        mirror(root);
+    }
+
+    private void mirror(Node<Integer> root){
+        if (root == null) return;
+        Node<Integer> temp = root.getLeftChild();
+        root.setLeftChild(root.getRightChild());
+        root.setRightChild(temp);
+        mirror(root.getLeftChild());
+        mirror(root.getRightChild());
+    }
+
     public Node<Integer> getRoot() {
         return root;
     }

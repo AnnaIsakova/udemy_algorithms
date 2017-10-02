@@ -70,5 +70,9 @@ public class Test {
         BreadthFirstTraversal.breadthFirst(tree10.getRoot()); //25 6 40 3 20 80 6 10 9 12
         System.out.println(tree10.get(66));
         System.out.println("minimum: " + tree10.findMinimum());
+        System.out.println("depth: " + tree10.findDepth());
+        tree10.mirror();
+        System.out.print("breadth-first after mirror: ");
+        BreadthFirstTraversal.breadthFirst(tree10.getRoot());
     }
 }
