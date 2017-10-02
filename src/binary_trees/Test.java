@@ -1,7 +1,6 @@
 package binary_trees;
 
 
-import soting_and_searching.BinarySearch;
 import stacks_queues.exceptions.QueueUnderflowException;
 
 
@@ -9,8 +8,8 @@ public class Test {
 
     public static void main(String[] args) throws QueueUnderflowException {
 //        testBinaryTree();
-
-        testBinarySearchTree();
+//        testBinarySearchTree();
+        System.out.println(possibleNumOfTrees(3));
     }
 
     static void testBinaryTree() throws QueueUnderflowException {
@@ -74,5 +73,20 @@ public class Test {
         tree10.mirror();
         System.out.print("breadth-first after mirror: ");
         BreadthFirstTraversal.breadthFirst(tree10.getRoot());
+    }
+
+    static int possibleNumOfTrees(int nodes){
+        if (nodes <= 1){
+            return 1;
+        }
+
+        int sum = 0;
+        for (int i = 1; i <= nodes; i++) {
+            int countLeft = possibleNumOfTrees(i - 1);
+            int countRight = possibleNumOfTrees(nodes - i);
+
+            sum = sum + (countLeft * countRight);
+        }
+        return sum;
     }
 }
