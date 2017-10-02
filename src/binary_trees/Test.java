@@ -69,5 +69,6 @@ public class Test {
         System.out.print("breadth-first: ");
         BreadthFirstTraversal.breadthFirst(tree10.getRoot()); //25 6 40 3 20 80 6 10 9 12
         System.out.println(tree10.get(66));
+        System.out.println("minimum: " + tree10.findMinimum());
     }
 }

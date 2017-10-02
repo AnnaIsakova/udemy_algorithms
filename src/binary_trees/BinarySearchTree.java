@@ -46,6 +46,16 @@ public class BinarySearchTree {
         return result;
     }
 
+    public Integer findMinimum(){
+        Node<Integer> min = getMin(root);
+        return min.getData();
+    }
+
+    private Node<Integer> getMin(Node<Integer> root){
+        if (root.getLeftChild() == null) return root;
+        return getMin(root.getLeftChild());
+    }
+
     public Node<Integer> getRoot() {
         return root;
     }
