@@ -8,8 +8,8 @@ public class Test {
 
     public static void main(String[] args) throws QueueUnderflowException {
 //        testBinaryTree();
-//        testBinarySearchTree();
-        System.out.println(possibleNumOfTrees(3));
+        testBinarySearchTree();
+//        System.out.println(possibleNumOfTrees(3));
     }
 
     static void testBinaryTree() throws QueueUnderflowException {
@@ -29,7 +29,7 @@ public class Test {
         System.out.print("depth-first post-order: ");
         DepthFirstTraversal.postOrder(tree10.getRoot()); //7 8 3 9 4 1 5 6 2 0
         System.out.println();
-
+        System.out.println("is BST: " + BinaryTrees.isBinarySearchTree(tree10));
 
 
         //breadth-first traversal using queues implemented in this course
@@ -70,9 +70,11 @@ public class Test {
         System.out.println(tree10.get(66));
         System.out.println("minimum: " + tree10.findMinimum());
         System.out.println("depth: " + tree10.findDepth());
-        tree10.mirror();
+//        tree10.mirror();
         System.out.print("breadth-first after mirror: ");
         BreadthFirstTraversal.breadthFirst(tree10.getRoot());
+        System.out.println("range 10 - 40: ");
+        System.out.println("is BST: " + BinaryTrees.isBinarySearchTree(tree10));
     }
 
     static int possibleNumOfTrees(int nodes){
