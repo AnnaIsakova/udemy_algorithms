@@ -1,6 +1,5 @@
 package binary_trees;
 
-import soting_and_searching.BinarySearch;
 
 public class BinaryTrees {
 
