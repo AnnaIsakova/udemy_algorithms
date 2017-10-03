@@ -48,7 +48,7 @@ public abstract class Heap<T extends Comparable> {
     }
 
     boolean isFull(){
-        return array.length == count;
+        return array.length >= count;
     }
 
     T getElementByIndex(int index){
@@ -56,4 +56,35 @@ public abstract class Heap<T extends Comparable> {
         return array[index];
 
     }
+
+    abstract void siftDown(int index);
+
+    abstract void siftUp(int index);
+
+    void insert(T elem){
+        if (isFull()){
+            throw new RuntimeException("queue is full");
+        }
+
+        array[count] = elem;
+        siftUp(count);
+        count++;
+    }
+
+    T removeHighestPriority(){
+        T elem = getHighestPriority();
+        array[0] = array[count-1];
+        count--;
+        siftDown(0);
+        return elem;
+    }
+
+    T getHighestPriority(){
+        if (isEmpty()) {
+            throw new RuntimeException("empty");
+        }
+
+        return array[0];
+    }
+
 }
