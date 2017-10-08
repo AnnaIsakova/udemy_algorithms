@@ -11,7 +11,7 @@ public class MinHeap<T extends Comparable> extends Heap<T> {
     }
 
     @Override
-    void siftDown(int index){
+    public void siftDown(int index){
         int leftChildIndex = getLeftChildIndex(index);
         int rightChildIndex = getRightChildIndex(index);
 
@@ -35,10 +35,10 @@ public class MinHeap<T extends Comparable> extends Heap<T> {
     }
 
     @Override
-    void siftUp(int index) {
+    public void siftUp(int index) {
         int parentIndex = getParentIndex(index);
 
-        if (parentIndex > -1 && getElementByIndex(parentIndex).compareTo(getElementByIndex(index)) < 0){
+        if (parentIndex > -1 && getElementByIndex(parentIndex).compareTo(getElementByIndex(index)) > 0){
             swap(index, parentIndex);
             siftUp(parentIndex);
         }
