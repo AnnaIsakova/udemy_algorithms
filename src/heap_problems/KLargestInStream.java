@@ -7,7 +7,7 @@ public class KLargestInStream {
 
     public static void main(String[] args) {
         int[] arr = {3,7,8,9,4,5,6,1,2,0};
-        Heap<Integer> heap = findKElemsInArray(2, arr);
+        Heap<Integer> heap = findKElemsInArray(5, arr);
         heap.printHeap();
     }
 
@@ -16,7 +16,7 @@ public class KLargestInStream {
 
         for (int i = 0; i < k; i++) {
             if (k >= array.length) return heap;
-            heap.insert(array[k]);
+            heap.insert(array[i]);
         }
 
         int root = heap.getElementByIndex(0);
