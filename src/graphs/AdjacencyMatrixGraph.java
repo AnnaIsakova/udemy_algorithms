@@ -1,11 +1,14 @@
 package graphs;
 
+import graphs.shortest_paths.DistanceInfo;
+import graphs.shortest_paths.ShortestPath;
 import stacks_queues.exceptions.QueueOverflowException;
 import stacks_queues.exceptions.QueueUnderflowException;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class AdjacencyMatrixGraph implements Graph{
 
@@ -99,15 +102,25 @@ public class AdjacencyMatrixGraph implements Graph{
     }
 
     static void testDirectedGraph() throws QueueUnderflowException, QueueOverflowException {
-        AdjacencyMatrixGraph graph = new AdjacencyMatrixGraph(5, GraphType.DIRECTED);
+        AdjacencyMatrixGraph graph = new AdjacencyMatrixGraph(10, GraphType.DIRECTED);
         graph.addEdge(0,1);
         graph.addEdge(0,2);
         graph.addEdge(2,3);
         graph.addEdge(3,1);
         graph.addEdge(3,4);
         graph.addEdge(1,4);
+        graph.addEdge(4,5);
+        graph.addEdge(5,6);
+        graph.addEdge(5,7);
+        graph.addEdge(7,9);
+        graph.addEdge(6,8);
+        graph.addEdge(9,8);
 
         List<Integer> sorted = TopologicalSort.sort(graph);
         System.out.println(sorted);
+
+        Map<Integer, DistanceInfo> distanceInfoMap = ShortestPath.buildDistanceTable(graph, 0);
+        ArrayList<Integer> path = ShortestPath.shortestPath(graph, 0, 4);
+        System.out.println(path);
     }
 }
