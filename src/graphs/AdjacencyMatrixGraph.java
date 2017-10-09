@@ -1,5 +1,8 @@
 package graphs;
 
+import stacks_queues.exceptions.QueueOverflowException;
+import stacks_queues.exceptions.QueueUnderflowException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -44,7 +47,7 @@ public class AdjacencyMatrixGraph implements Graph{
         return list;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws QueueUnderflowException, QueueOverflowException {
         AdjacencyMatrixGraph graph = new AdjacencyMatrixGraph(5, GraphType.UNDIRECTED);
         graph.addEdge(0, 1);
         graph.addEdge(0, 2);
@@ -53,7 +56,10 @@ public class AdjacencyMatrixGraph implements Graph{
         graph.addEdge(1, 4);
         graph.addEdge(3, 4);
 
-        int[] visited = new int[5];
-        GraphTraversal.deapthFirstTraversal(graph, visited, 0);
+        int[] visited1 = new int[5];
+        int[] visited2 = new int[5];
+        GraphTraversal.deapthFirstTraversal(graph, visited1, 0);
+        System.out.println();
+        GraphTraversal.breadthFirstTraversal(graph, visited2, 0);
     }
 }
