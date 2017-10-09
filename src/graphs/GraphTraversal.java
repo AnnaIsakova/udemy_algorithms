@@ -19,11 +19,6 @@ public class GraphTraversal {
         for (Integer v : adjacents) {
             deapthFirstTraversal(graph, visited, v);
         }
-
-        //for unconnected graph
-//        for (int i = 0; i < N; i++) {
-//            deapthFirstTraversal(graph, visited, i);
-//        }
     }
 
     static void breadthFirstTraversal(Graph graph, int[] visited, int vertex) throws QueueOverflowException, QueueUnderflowException {

@@ -57,9 +57,16 @@ public class AdjacencyMatrixGraph implements Graph{
         graph.addEdge(3, 4);
 
         int[] visited1 = new int[5];
-        int[] visited2 = new int[5];
-        GraphTraversal.deapthFirstTraversal(graph, visited1, 0);
+        //loop for unconnected graph
+        for (int i = 0; i < graph.numOfVertices; i++) {
+            GraphTraversal.deapthFirstTraversal(graph, visited1, 0);
+        }
+
         System.out.println();
-        GraphTraversal.breadthFirstTraversal(graph, visited2, 0);
+
+        int[] visited2 = new int[5];
+        for (int i = 0; i < graph.numOfVertices; i++) {
+            GraphTraversal.breadthFirstTraversal(graph, visited2, 0);
+        }
     }
 }
