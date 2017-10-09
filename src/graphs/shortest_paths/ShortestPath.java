@@ -5,10 +5,7 @@ import stacks_queues.Queue;
 import stacks_queues.exceptions.QueueOverflowException;
 import stacks_queues.exceptions.QueueUnderflowException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class ShortestPath {
@@ -41,6 +38,52 @@ public class ShortestPath {
             }
         }
 
+        return table;
+    }
+
+    public static Map<Integer, DistanceInfoGreedy> buildDistanceTableDreedy(Graph graph, int source){
+        Map<Integer, DistanceInfoGreedy> table = new HashMap<>();
+        PriorityQueue<VertexInfo> queue = new PriorityQueue<VertexInfo>(new Comparator<VertexInfo>() {
+            @Override
+            public int compare(VertexInfo v1, VertexInfo v2) {
+                return ((Integer) v1.getVertexDist()).compareTo(v2.getVertexDist());
+            }
+        });
+
+        Map<Integer, VertexInfo> vertexInfoMap = new HashMap<>();
+        for (int i = 0; i < graph.getNumOfVertices(); i++) {
+            table.put(i, new DistanceInfoGreedy());
+        }
+
+        table.get(source).setDistance(0);
+        table.get(source).setLastVertex(source);
+
+        VertexInfo vertexInfo = new VertexInfo(source, 0);
+        queue.add(vertexInfo);
+        vertexInfoMap.put(source, vertexInfo);
+
+        while (!queue.isEmpty()){
+            VertexInfo currVertexInfo = queue.poll();
+            int currVertex = currVertexInfo.getVertexId();
+
+            for (Integer neighbour : graph.getAdjacentVertices(currVertex)){
+                int distance = table.get(currVertex).getDistance() + graph.getWeightedEdge(currVertex, neighbour);
+
+                if (distance < table.get(neighbour).getDistance()){
+                    table.get(neighbour).setDistance(distance);
+                    table.get(neighbour).setLastVertex(currVertex);
+                }
+
+                VertexInfo neighbourVertexInfo = vertexInfoMap.get(neighbour);
+                if (neighbourVertexInfo != null){
+                    queue.remove(neighbourVertexInfo);
+                }
+
+                neighbourVertexInfo = new VertexInfo(neighbour, distance);
+                queue.add(neighbourVertexInfo);
+                vertexInfoMap.put(neighbour, neighbourVertexInfo);
+            }
+        }
         return table;
     }
 

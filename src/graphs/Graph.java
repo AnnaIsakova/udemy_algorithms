@@ -17,4 +17,5 @@ public interface Graph {
 
     GraphType getType();
     int getNumOfVertices();
+    int getWeightedEdge(int v1, int v2);
 }

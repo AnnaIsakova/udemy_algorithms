@@ -73,6 +73,10 @@ public class AdjacencyMatrixGraph implements Graph{
         return indegree;
     }
 
+    public int getWeightedEdge(int v1, int v2){
+        return v1 * v2;
+    }
+
     public static void main(String[] args) throws QueueUnderflowException, QueueOverflowException {
 //        testUndirectedGraph();
         testDirectedGraph();
