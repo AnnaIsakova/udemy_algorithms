@@ -5,11 +5,16 @@ import java.util.List;
 public interface Graph {
 
     enum GraphType{
-        DIRECTD,
+        DIRECTED,
         UNDIRECTED
     }
 
     void addEdge(int v1, int v2);
 
     List<Integer> getAdjacentVertices(int v);
+
+    int getIndegree(int v);
+
+    GraphType getType();
+    int getNumOfVertices();
 }

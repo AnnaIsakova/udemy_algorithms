@@ -14,6 +14,8 @@ public class Queue<T> {
     private int headIndex = EMPTY_VALUE;
     private int tailIndex = EMPTY_VALUE;
 
+    private int count;
+
     public Queue(Class<T> clazz) {
         elements = (T[]) Array.newInstance(clazz, MAX_SIZE);
     }
@@ -38,6 +40,8 @@ public class Queue<T> {
         if (headIndex == EMPTY_VALUE){
             headIndex = tailIndex;
         }
+
+        count++;
     }
 
     public T dequeue() throws QueueUnderflowException {
@@ -46,14 +50,18 @@ public class Queue<T> {
         }
 
         T data = elements[headIndex];
-
         if (headIndex == tailIndex){
             headIndex = EMPTY_VALUE;
         } else {
             headIndex = (headIndex + 1) % MAX_SIZE;
         }
 
+        count--;
         return data;
+    }
+
+    public int size(){
+        return count;
     }
 
 }

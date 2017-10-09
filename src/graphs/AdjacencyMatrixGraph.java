@@ -9,7 +9,7 @@ import java.util.List;
 
 public class AdjacencyMatrixGraph implements Graph{
 
-    public GraphType type = GraphType.DIRECTD;
+    public GraphType type = GraphType.DIRECTED;
     int[][] matrix;
     int numOfVertices;
 
@@ -17,6 +17,14 @@ public class AdjacencyMatrixGraph implements Graph{
         this.numOfVertices = numOfVertices;
         this.type = type;
         matrix = new int[numOfVertices][numOfVertices];
+    }
+
+    public GraphType getType() {
+        return type;
+    }
+
+    public int getNumOfVertices() {
+        return numOfVertices;
     }
 
     @Override
@@ -47,7 +55,27 @@ public class AdjacencyMatrixGraph implements Graph{
         return list;
     }
 
+    @Override
+    public int getIndegree(int v) {
+        if (v < 0 || v >= numOfVertices){
+            throw new IllegalArgumentException("not valid vertex");
+        }
+
+        int indegree = 0;
+        for (int i = 0; i < numOfVertices; i++) {
+            if (matrix[i][v] == 1){
+                indegree++;
+            }
+        }
+        return indegree;
+    }
+
     public static void main(String[] args) throws QueueUnderflowException, QueueOverflowException {
+//        testUndirectedGraph();
+        testDirectedGraph();
+    }
+
+    static void testUndirectedGraph() throws QueueUnderflowException, QueueOverflowException {
         AdjacencyMatrixGraph graph = new AdjacencyMatrixGraph(5, GraphType.UNDIRECTED);
         graph.addEdge(0, 1);
         graph.addEdge(0, 2);
@@ -68,5 +96,18 @@ public class AdjacencyMatrixGraph implements Graph{
         for (int i = 0; i < graph.numOfVertices; i++) {
             GraphTraversal.breadthFirstTraversal(graph, visited2, 0);
         }
+    }
+
+    static void testDirectedGraph() throws QueueUnderflowException, QueueOverflowException {
+        AdjacencyMatrixGraph graph = new AdjacencyMatrixGraph(5, GraphType.DIRECTED);
+        graph.addEdge(0,1);
+        graph.addEdge(0,2);
+        graph.addEdge(2,3);
+        graph.addEdge(3,1);
+        graph.addEdge(3,4);
+        graph.addEdge(1,4);
+
+        List<Integer> sorted = TopologicalSort.sort(graph);
+        System.out.println(sorted);
     }
 }
